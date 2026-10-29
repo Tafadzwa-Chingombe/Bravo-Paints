@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paint Calculator — Bravo Paints</title>
+  <meta name="description" content="Work out exactly how much Bravo paint you need. Enter your room sizes, coats and product to get litres and the best tin combination.">
+  <meta name="theme-color" content="#0a1f3c">
+  <meta property="og:title" content="Paint Calculator — Bravo Paints">
+  <meta property="og:description" content="Work out exactly how much Bravo paint you need. Enter your room sizes, coats and product to get litres and the best tin combination.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/about-promise.jpg">
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="Bravo Paints home"><img src="assets/img/logo.png" alt="Bravo Paints" width="80" height="48"></a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="colours.html">Colour Catalogue</a>
+      <a href="calculator.html" aria-current="page">Paint Calculator</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn--royal" href="contact.html#dealer">Find a Dealer</a>
+    </nav>
+    <a class="btn btn--royal btn--sm header-cta" href="contact.html#dealer">Find a Dealer</a>
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero page-hero--compact" aria-labelledby="calc-title">
+  <div class="page-hero__content">
+    <div class="inner">
+      <h1 class="page-hero__title reveal" id="calc-title">Paint <span class="accent">Calculator</span></h1>
+      <p class="page-hero__text reveal" style="--d:.1s">Estimate exactly how much paint you need &ndash; before you spend a single naira on materials. Add as many rooms as you like.</p>
+    </div>
+  </div>
+  <div class="page-hero__media">
+    <img src="assets/img/about-promise.jpg" alt="Roller applying navy paint to a wall" fetchpriority="high">
+  </div>
+</section>
+
+<section class="section" style="padding-top:56px">
+  <div class="container calc">
+    <form class="calc-panel" id="calc-form" novalidate>
+      <h2>Tell us about your project</h2>
+      <p class="muted">All measurements in metres. Results update as you type.</p>
+
+      <div class="calc-step">
+        <div class="calc-step__title"><span class="num">1</span>What are you painting?</div>
+        <div class="option-grid" role="radiogroup" aria-label="Surface" id="surface-options">
+          <button class="option" type="button" role="radio" data-surface="interior" aria-checked="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="22" height="20" rx="1.5"/><path d="M12 34v-8h6v8M22 6h10v6H22zM27 12v6h-5"/></svg>
+            Interior walls
+          </button>
+          <button class="option" type="button" role="radio" data-surface="exterior" aria-checked="false">
+            <svg viewBox="0 0 40 40" fill="none" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M6 18L20 6l14 12M10 15v19h20V15"/><path d="M17 34v-9h6v9"/></svg>
+            Exterior walls
+          </button>
+          <button class="option" type="button" role="radio" data-surface="ceiling" aria-checked="false">
+            <svg viewBox="0 0 40 40" fill="none" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h32M20 8v7M8 26c0-6 5-11 12-11s12 5 12 11H8z"/></svg>
+            Ceilings
+          </button>
+          <button class="option" type="button" role="radio" data-surface="metal" aria-checked="false">
+            <svg viewBox="0 0 40 40" fill="none" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M30 5l5 5-21 21-7 2 2-7L30 5zM26 9l5 5"/></svg>
+            Wood &amp; metal
+          </button>
+        </div>
+      </div>
+
+      <div class="calc-step">
+        <div class="calc-step__title" style="justify-content:space-between;flex-wrap:wrap">
+          <span style="display:flex;gap:12px;align-items:center"><span class="num">2</span>Measurements</span>
+          <div class="segmented" role="radiogroup" aria-label="Measurement mode">
+            <button type="button" role="radio" aria-checked="true" data-mode="rooms">Room sizes</button>
+            <button type="button" role="radio" aria-checked="false" data-mode="area">I know the area</button>
+          </div>
+        </div>
+        <div id="rooms-mode">
+          <div id="rooms"></div>
+          <button class="add-room" type="button" id="add-room">+ Add another room</button>
+        </div>
+        <div id="area-mode" hidden>
+          <div class="field" style="max-width:280px">
+            <label for="direct-area">Total area to paint (m²)</label>
+            <input id="direct-area" type="number" min="0" step="0.5" inputmode="decimal" value="40">
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-step">
+        <div class="calc-step__title"><span class="num">3</span>Number of coats</div>
+        <div class="option-grid option-grid--3" role="radiogroup" aria-label="Coats" id="coat-options">
+          <button class="option" type="button" role="radio" data-coats="1" aria-checked="false">1 coat<small>Touch-up / same colour</small></button>
+          <button class="option" type="button" role="radio" data-coats="2" aria-checked="true">2 coats<small>Recommended</small></button>
+          <button class="option" type="button" role="radio" data-coats="3" aria-checked="false">3 coats<small>Big colour change</small></button>
+        </div>
+      </div>
+
+      <div class="calc-step">
+        <div class="calc-step__title"><span class="num">4</span>Surface condition</div>
+        <div class="option-grid option-grid--3" role="radiogroup" aria-label="Condition" id="condition-options">
+          <button class="option" type="button" role="radio" data-condition="1" aria-checked="true">Previously painted<small>Smooth, sound</small></button>
+          <button class="option" type="button" role="radio" data-condition="1.15" aria-checked="false">New / porous<small>+15% absorption</small></button>
+          <button class="option" type="button" role="radio" data-condition="1.25" aria-checked="false">Rough / textured<small>+25% coverage</small></button>
+        </div>
+      </div>
+
+      <div class="calc-step">
+        <div class="calc-step__title"><span class="num">5</span>Choose your product</div>
+        <div class="field">
+          <label class="visually-hidden" for="product-select">Product</label>
+          <select id="product-select" class="select" style="border-radius:var(--radius-sm);width:100%"></select>
+        </div>
+      </div>
+    </form>
+
+    <aside class="calc-result" aria-labelledby="result-title" aria-live="polite">
+      <h2 id="result-title">Your Estimate</h2>
+      <p class="muted" id="result-product">Ultra Premium · ~12 m²/L</p>
+      <div class="metric-grid">
+        <div class="metric metric--hl"><small>Paint required</small><strong id="r-litres">0<span>litres</span></strong></div>
+        <div class="metric"><small>Paintable area</small><strong id="r-area">0<span>m²</span></strong></div>
+        <div class="metric"><small>Coats</small><strong id="r-coats">2</strong></div>
+      </div>
+      <h3 style="font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:10px">Recommended tins</h3>
+      <ul class="tins" id="r-tins"></ul>
+      <div style="display:grid;gap:10px">
+        <a class="btn btn--yellow btn--block" href="contact.html#dealer">Find a dealer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <button class="btn btn--outline-light btn--block" type="button" onclick="window.print()">Print / save estimate</button>
+      </div>
+      <p class="note">Includes 10% extra for touch-ups and wastage. Coverage figures are typical values; actual coverage depends on surface, colour and application method.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--mist" aria-labelledby="how-title">
+  <div class="container">
+    <div class="section-head">
+      <div class="reveal">
+        <span class="eyebrow">How it works</span>
+        <h2 class="h2" id="how-title">How the calculator works</h2>
+      </div>
+      <a class="link-arrow reveal" href="faq.html">Painting FAQs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Enter room size</h3><p>Length, width and ceiling height give us the total wall (or ceiling) area.</p></div>
+      <div class="step reveal" style="--d:.06s"><h3>Deduct openings</h3><p>We subtract ~1.9 m² per door and ~1.5 m² per window from the paintable area.</p></div>
+      <div class="step reveal" style="--d:.12s"><h3>Adjust for surface</h3><p>Coats and surface condition change how much paint the wall will absorb.</p></div>
+      <div class="step reveal" style="--d:.18s"><h3>Get your estimate</h3><p>We divide by the product's coverage and find the tin combination with least waste.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+<section class="cta-wrap" aria-label="Get started">
+  <div class="container">
+    <div class="cta reveal">
+      <h2>Bring your vision to life.</h2>
+      <p>From bold interiors to durable exteriors, Bravo Paints helps create spaces you'll be proud of.</p>
+      <a class="btn btn--ink" href="colours.html">Explore Colours <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="Bravo Paints" width="87" height="52" loading="lazy">
+        <p>Our &ldquo;value for money&rdquo; range, providing an appropriate balance of economic cost and quality.</p>
+        <div class="socials"><a href="https://x.com/" target="_blank" rel="noopener" aria-label="Bravo Paints on X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.3L5.3 21H2.2l7.2-8.3L1.8 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a><a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Bravo Paints on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1 1-1h2.5V2h-3.4C10.4 2 9.7 4.6 9.7 6.3v2.2H7.5V12h2.2v10H14V12h3l.5-3.5H14z"/></svg></a><a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Bravo Paints on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div>
+      </div>
+      <div class="footer-col">
+        <h3>Pages</h3>
+        <ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="colours.html">Colour Catalogue</a></li><li><a href="calculator.html">Paint Calculator</a></li><li><a href="contact.html">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h3>Brands</h3>
+        <ul><li><span>Parker Paints</span></li><li><a href="index.html">Bravo Paints</a></li></ul>
+      </div>
+      <div class="footer-col footer-news">
+        <h3>Subscribe to Newsletter</h3>
+        <form class="newsletter" novalidate>
+          <label class="visually-hidden" for="nl-email">Email address</label>
+          <input id="nl-email" type="email" name="email" placeholder="Enter email address" autocomplete="email" required>
+          <button type="submit">Join</button>
+        </form>
+        <p class="newsletter-note" aria-live="polite"></p>
+      </div>
+    </div>
+    <p class="footer-bottom">&copy; Copyright <span data-year>2026</span>, All Rights Reserved by Bravo Paints. Designed by Tafadzwa Kevin Chingombe</p>
+  </div>
+</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/calculator.js"></script>
+</body>
+</html>
